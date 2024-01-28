@@ -1,48 +1,38 @@
-char *keytab[] = {"auto", "break", "case", "char", "const", "continue", "default", "if", "int", "struct", "unsigned", "void", "volatile", "while"};
 
 struct treenode
 {
+    int line;
     char *word;
-    int count;
-    struct treenode *left;
-    struct treenode *right;
+    struct treenode *next;
 };
 
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include "getword.h"
 
-#define MAXWORD 100
-#define NKEYS (sizeof(keytab) / sizeof(keytab[0]))
-
-struct treenode *addtree(struct treenode *root, char *word);
-int binsearch(char *word, char * tab[], int n);
-char *stralloc(int size);
-void treeprint(struct treenode *root);
+#include <stdlib.h>
+struct treenode *changeTree(struct treenode *root);
+int *changeInt(int * x);
 int main(int argc, char *argv)
 {
-    printf("UR MUM");
-    printf("||%s||", keytab[6]);
-    binsearch("test", keytab,14);
+    int y = 2;
+    int *x;
+    x = (int *) malloc(sizeof(int));
+    *x = y;
+    changeInt(x);
+    printf("%i\n", *x);
+    
+    struct treenode *t1;
+    t1 = ( struct treenode *) malloc(sizeof(struct treenode));
+    changeTree(t1);
+    printf("%i\n", t1 -> line);
 }
-int binsearch(char *word, char *tab[], int n)
+int *changeInt(int *x)
 {
-    int cond;
-    int low, high, mid;
-    low = 0;
-    high = n - 1;
-    while (low <= high)
-    {
-        mid = (low + high) / 2;
-        printf("%s", tab[mid]);
-        printf("%s", word);
-        if ((cond = strcmp(word, tab[mid])) < 0)
-            high = mid - 1;
-        else if (cond > 0)
-            low = mid + 1;
-        else
-            return mid;
-    }
-    return -1;
+    *x =  9;
+    return x;
+}
+
+struct treenode *changeTree(struct treenode *root)
+{
+    root -> line = 69;
+    return root;
 }
